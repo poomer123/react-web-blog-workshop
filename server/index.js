@@ -2,7 +2,7 @@ const path = require('path')
 const express = require('express')
 const favicon = require('serve-favicon')
 const renderer = require('./renderer')
-const paths = requre('../config/paths')
+const paths = require('../config/paths')
 const app = express()
 
 app.use(favicon(path.resolve(paths.public, 'favicon.ico')))
