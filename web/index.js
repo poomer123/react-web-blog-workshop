@@ -2,15 +2,8 @@
 import './index.scss'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './app/app.js'
 
-
-class App extends React.Component {
-	render() {
-		return (
-			<div>Hi React eieiei</div>
-		)
-	}
-}
 
 ReactDOM.render(
 	<App />,
