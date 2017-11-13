@@ -10,7 +10,7 @@
   },
   "betterScripts": {
     "start-csr-dev": {
-      "command": "SET node ./server/index.js",
+      "command": "node ./server/index.js",
       "env": {
         "NODE_ENV": "development"
       }
