@@ -21,6 +21,7 @@ module.exports = {
 		rules: [
 			ruleJS.dev,
 			ruleCSS.global.dev,
+			ruleCSS.cssModule.dev,
 			ruleStatic,
 		]
 	},
@@ -39,6 +40,6 @@ module.exports = {
 		headers: { 'Access-Control-Allow-Origin': 'http://localhost:8001' },
 		noInfo: true,
 		historyApiFallback: true,
-		compress: true,
+		compress: true
 	}
 }
