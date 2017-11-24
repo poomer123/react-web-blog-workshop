@@ -1,12 +1,11 @@
 import React from 'react'
+import Header from '../header/header'
 
 class App extends React.Component {
 	render() {
 		return (
 			<div className="container">
-				<div className="pug">
-					<div className="pugHeading"> Pug Clug Blog </div>
-				</div>
+				<Header />
 				<div className="content">
 					The content
 				</div>
