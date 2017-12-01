@@ -1,4 +1,36 @@
+
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const paths = require('../paths')
+
+const globalProd = {
+  test: /^((?!\.module\.).)*\.s?css$/,
+  use: ExtractTextPlugin.extract({
+    fallback: 'style-loader',
+    use: [
+      {
+        loader: 'css-loader',
+        options: {
+          importLoaders: 2,
+          localIdentName: '[hash:base64:8]',
+          minimize: true,
+        },
+      },
+      {
+        loader: 'postcss-loader',
+        options: {
+          plugins: loader => [require('autoprefixer')()],
+        }
+      },
+      {
+        loader: 'sass-loader',
+        options: {
+          includePaths: [paths.src]
+        }
+      },
+    ]
+  }),
+}
+
 const globalDev = {
   test: /^((?!\.module\.).)*\.s?css$/,
   use: [
@@ -17,6 +49,36 @@ const globalDev = {
       }
     },
   ],
+}
+
+const cssModuleProd = {
+  test: /\.module\.s?css$/,
+  use: ExtractTextPlugin.extract({
+    fallback: 'style-loader',
+    use: [
+      {
+        loader: 'css-loader',
+        options: {
+          modules: true,
+          importLoaders: 2,
+          localIdentName: '[hash:base64:8]',
+          minimize: true,
+        }
+      },
+      {
+        loader: 'postcss-loader',
+        options: {
+          plugins: loader => [require('autoprefixer')()],
+        }
+      },
+      {
+        loader: 'sass-loader',
+        options: {
+          includePaths: [paths.src]
+        }
+      },
+    ],
+  })
 }
 
 const cssModuleDev = {
@@ -50,8 +112,10 @@ const cssModuleDev = {
 module.exports = {
   global: {
     dev: globalDev,
+    prod: globalProd,
   },
   cssModule: {
     dev: cssModuleDev,
+    prod: cssModuleProd,
   }
 }
