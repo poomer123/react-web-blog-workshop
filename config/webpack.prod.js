@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const AssetsPlugin = require('assets-webpack-plugin')
 const paths = require('./paths')
 const ruleJS = require('./rules/ruleJS')
 const ruleCSS = require('./rules/ruleCSS')
@@ -34,6 +35,11 @@ module.exports = {
 			'process.env': {
 				NODE_ENV: JSON.stringify('production')
 			}
+		}),
+		new AssetsPlugin({
+			filename: ' webpack-assets.json',
+			path: paths.root,
+			prettyPrint: true,
 		}),
 		new ExtractTextPlugin({
 			filename: 'css/[name].[contenthash].css',
