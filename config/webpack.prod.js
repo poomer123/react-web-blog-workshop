@@ -37,7 +37,7 @@ module.exports = {
 			}
 		}),
 		new AssetsPlugin({
-			filename: ' webpack-assets.json',
+			filename: 'webpack-assets.json',
 			path: paths.root,
 			prettyPrint: true,
 		}),
