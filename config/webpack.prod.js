@@ -14,13 +14,14 @@ module.exports = {
 		vendor: [require.resolve('./polyfills-client.js')].concat(vendors)
 	},
 	output: {
-		filename: 'js/[name].js',
+		filename: 'js/[name].[chunkhash].js',
 		path: paths.build,
 		publicPath: '/build/',
 	},
 	resolve: {
 		modules: [paths.src, 'node_modules'],
 	},
+	recordsPath: path.resolve(paths.root, 'webpack-records.json'),
 	module: {
 		rules: [
 			ruleJS.prod,
@@ -40,6 +41,7 @@ module.exports = {
 			path: paths.root,
 			prettyPrint: true,
 		}),
+		new webpack.HashedModuleIdsPlugin(),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: ['vendor', 'manifest'],
 			minChunks: Infinity
