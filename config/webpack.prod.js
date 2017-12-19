@@ -41,7 +41,7 @@ module.exports = {
 			prettyPrint: true,
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
-			name: ['vendor'],
+			name: ['vendor', 'manifest'],
 			minChunks: Infinity
 		}),
 		new ExtractTextPlugin({
@@ -51,6 +51,7 @@ module.exports = {
 		new webpack.SourceMapDevToolPlugin({
 			test: /.js$/,
 			filename: '[file].map',
+			exclude: [/vendor/, /manifest/]
 		}),
 		new webpack.LoaderOptionsPlugin({
 			minimize: false,

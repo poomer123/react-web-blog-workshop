@@ -5,5 +5,8 @@
   },
   "vendor": {
     "js": "/build/js/vendor.js"
+  },
+  "manifest": {
+    "js": "/build/js/manifest.js"
   }
 }
