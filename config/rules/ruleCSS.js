@@ -51,6 +51,25 @@ const globalDev = {
   ],
 }
 
+const globalServer = {
+  test: /^((?!\.module\.).)*\.s?css$/,
+  use: [
+    'css-loader/locals',
+    {
+      loader: 'postcss-loader',
+      options: {
+        plugins: loader => [require('autoprefixer')()],
+      }
+    },
+    {
+      loader: 'sass-loader',
+      options: {
+        includePaths: [paths.src]
+      }
+    },
+  ],
+}
+
 const cssModuleProd = {
   test: /\.module\.s?css$/,
   use: ExtractTextPlugin.extract({
@@ -108,14 +127,41 @@ const cssModuleDev = {
   ],
 }
 
+const cssModuleServer = {
+  test: /\.module\.s?css$/,
+  use: [
+    {
+      loader: 'css-loader/locals',
+      options: {
+        modules: true,
+        importLoaders: 2,
+        localIdentName: '[hash:base64:8]',
+      }
+    },
+    {
+      loader: 'postcss-loader',
+      options: {
+        plugins: loader => [require('autoprefixer')()],
+      }
+    },
+    {
+      loader: 'sass-loader',
+      options: {
+        includePaths: [paths.src]
+      }
+    },
+  ],
+}
 
 module.exports = {
   global: {
     dev: globalDev,
     prod: globalProd,
+    server: globalServer,
   },
   cssModule: {
     dev: cssModuleDev,
     prod: cssModuleProd,
+    server: cssModuleServer,
   }
 }

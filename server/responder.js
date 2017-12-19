@@ -10,7 +10,7 @@ module.exports = function responder(res) {
       return res.status(500).send(error.massage)
     }
     if(redirect) {
-      return res.redirect(302 redirect.url)
+      return res.redirect(302, redirect.url)
     }
     const html = markup
       .replace('___CONTENT___', content)

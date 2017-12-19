@@ -9,5 +9,3 @@ if(isSSR) {
 }
 
 module.exports = renderer
-
-___CONTENT___
