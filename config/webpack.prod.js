@@ -6,13 +6,12 @@ const paths = require('./paths')
 const ruleJS = require('./rules/ruleJS')
 const ruleCSS = require('./rules/ruleCSS')
 const ruleStatic = require('./rules/ruleStatic')
+const vendors = require('./vendors')
 
 module.exports = {
 	entry: {
-		main: [
-			require.resolve('./polyfills-client.js'),
-			path.resolve(paths.src, 'index.js')
-		]
+		main: path.resolve(paths.src, 'index.js'),
+		vendor: [require.resolve('./polyfills-client.js')].concat(vendors)
 	},
 	output: {
 		filename: 'js/[name].js',
@@ -40,6 +39,10 @@ module.exports = {
 			filename: 'webpack-assets.json',
 			path: paths.root,
 			prettyPrint: true,
+		}),
+		new webpack.optimize.CommonsChunkPlugin({
+			name: ['vendor'],
+			minChunks: Infinity
 		}),
 		new ExtractTextPlugin({
 			filename: 'css/[name].[contenthash].css',
