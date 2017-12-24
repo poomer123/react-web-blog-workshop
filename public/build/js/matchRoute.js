@@ -195,19 +195,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 function matchRoute(req) {
+  console.log('mat!');
   return new Promise((resolve, reject) => {
     Object(__WEBPACK_IMPORTED_MODULE_2_react_router__["match"])({ routes: __WEBPACK_IMPORTED_MODULE_3__web_routes__["a" /* default */], location: req.url }, (error, redirectLocation, renderProp) => {
-      if ({ error }) {
+      if (error) {
+        console.log('1!');
         resolve({ error });
       } else if (redirectLocation) {
+        console.log('2!');
         resolve({
           redirect: {
             url: redirectLocation.pathname + redirectLocation.search
           }
         });
       } else if (renderProp) {
-        const element = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router__["RouterContext"], renderProps);
+        console.log(renderProp);
+        const element = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router__["RouterContext"], renderProp);
         const content = __WEBPACK_IMPORTED_MODULE_1_react_dom_server___default.a.renderToString(element);
+        console.log(content);
         resolve({ content });
       } else {
         console.log('error');
