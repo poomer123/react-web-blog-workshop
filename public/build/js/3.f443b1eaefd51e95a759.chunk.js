@@ -1,0 +1,2 @@
+webpackJsonp([3],{DFp7:function(t,e,i){"use strict";function o(t){return n()("div",{},void 0,n()("h1",{},void 0,"Latest Posts"),n()("div",{},void 0,"Post 1"),n()("div",{},void 0,"Post 2"))}Object.defineProperty(e,"__esModule",{value:!0});var d=i("dcb+"),n=i.n(d),s=i("GiK3");i.n(s);e.default=o}});
+//# sourceMappingURL=3.f443b1eaefd51e95a759.chunk.js.map

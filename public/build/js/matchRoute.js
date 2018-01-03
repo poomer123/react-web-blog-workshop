@@ -103,6 +103,7 @@ module.exports = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("Jmof");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 
@@ -131,7 +132,7 @@ class Home extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   }
 }
 
-/* harmony default export */ __webpack_exports__["a"] = (Home);
+/* harmony default export */ __webpack_exports__["default"] = (Home);
 
 /***/ }),
 
@@ -146,6 +147,7 @@ module.exports = require("react");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("Jmof");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 
@@ -173,7 +175,7 @@ class About extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   }
 }
 
-/* harmony default export */ __webpack_exports__["a"] = (About);
+/* harmony default export */ __webpack_exports__["default"] = (About);
 
 /***/ }),
 
@@ -340,17 +342,32 @@ module.exports = require("react-router");
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_app__ = __webpack_require__("pCua");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__home_home__ = __webpack_require__("DFp7");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__about_about__ = __webpack_require__("O+B3");
 
+// import Home from './home/home'
+// import About from './about/about'
 
-
+function loadRoute(cb) {
+  return module => {
+    cb(null, module.default);
+  };
+}
 
 const routes = {
   path: '/',
   component: __WEBPACK_IMPORTED_MODULE_0__app_app__["a" /* default */],
-  indexRoute: { component: __WEBPACK_IMPORTED_MODULE_1__home_home__["a" /* default */] },
-  childRoutes: [{ path: 'about', component: __WEBPACK_IMPORTED_MODULE_2__about_about__["a" /* default */] }]
+  indexRoute: {
+    // component: Home,
+    getComponent(nextState, cb) {
+      new Promise(function(resolve) { resolve(); }).then(__webpack_require__.bind(null, "DFp7")).then(loadRoute(cb));
+    }
+  },
+  childRoutes: [{
+    path: 'about',
+    // component: About,
+    getComponent(nextState, cb) {
+      new Promise(function(resolve) { resolve(); }).then(__webpack_require__.bind(null, "O+B3")).then(loadRoute(cb));
+    }
+  }]
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (routes);
