@@ -21,12 +21,6 @@ function counter( state = 0, action ) {
 }
 
 const store = createStore(counter)
-store.subscribe(() => {
-	console.log(store.getState())
-})
-console.log( store.getState() )
-store.dispatch( {type: 'INCREMENT'} )
-
 
 match(
 	{history: browserHistory, routes},
