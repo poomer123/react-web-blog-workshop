@@ -99,6 +99,38 @@ module.exports = {
 
 /***/ }),
 
+/***/ "BUo6":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("Jmof");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+class Post extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+  render() {
+    const { data } = this.props;
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      null,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'h3',
+        null,
+        data.title
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        data.body
+      )
+    );
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (Post);
+
+/***/ }),
+
 /***/ "DFp7":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -106,10 +138,23 @@ module.exports = {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("Jmof");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__posts_postlist__ = __webpack_require__("w/LM");
+
 
 
 class Home extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+  constructor(...args) {
+    var _temp;
+
+    return _temp = super(...args), this.state = { data: null, isLoading: false }, _temp;
+  }
+
+  componentDidMount() {
+    this.setState({ isLoading: true });
+    fetch('https://jsonplaceholder.typicode.com/posts?userId=1').then(d => d.json()).then(d => this.setState({ data: d, isLoading: false }));
+  }
   render() {
+    const { isLoading, data } = this.state;
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       null,
@@ -118,21 +163,24 @@ class Home extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
         null,
         'Latest Posts'
       ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      isLoading && __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
         'div',
         null,
-        'Post 1'
+        'Loading...'
       ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        null,
-        'Post 2'
-      )
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__posts_postlist__["a" /* default */], { data: data })
     );
   }
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Home);
+
+/***/ }),
+
+/***/ "H/qB":
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
 
 /***/ }),
 
@@ -150,9 +198,20 @@ module.exports = require("react");
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("Jmof");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__("H/qB");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_redux__);
+
 
 
 class About extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+  constructor(...args) {
+    var _temp;
+
+    return _temp = super(...args), this._handleClick = () => {
+      this.props.handleClick();
+    }, _temp;
+  }
+
   render() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
@@ -169,13 +228,33 @@ class About extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           'div',
           null,
           'We are pug lover community. All things pugs.'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          { onClick: this._handleClick },
+          'Click ',
+          this.props.count
         )
       )
     );
   }
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (About);
+function selector(state) {
+  return {
+    count: state
+  };
+}
+
+function mapDispatch(dispatch) {
+  return {
+    handleClick: () => {
+      dispatch({ type: 'INCREMENT' });
+    }
+  };
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect"])(selector, mapDispatch)(About));
 
 /***/ }),
 
@@ -371,6 +450,33 @@ const routes = {
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (routes);
+
+/***/ }),
+
+/***/ "w/LM":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("Jmof");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Post__ = __webpack_require__("BUo6");
+
+
+
+class PostList extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+  render() {
+    const { data } = this.props;
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      null,
+      data && data.map(e => {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Post__["a" /* default */], { data: e, key: `post_${e.id}` });
+      })
+    );
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (PostList);
 
 /***/ })
 
