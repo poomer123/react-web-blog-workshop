@@ -23,7 +23,7 @@ class About extends React.Component {
 
 function selector(state) {
   return {
-    count: state,
+    count: state.counter,
   }
 }
 

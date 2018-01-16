@@ -5,7 +5,7 @@ class Header extends React.Component {
 	render() {
 		return (
 			<div className={css.container}>
-				<div className={css.pugHeading}> Pug Clug Blog </div>
+				<div className={css.pugHeading}> Pug Club Blog </div>
 			</div>
 		)
 	}

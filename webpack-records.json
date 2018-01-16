@@ -286,7 +286,9 @@
       "node_modules/react-redux/es/connect/connect.js": "yyvF",
       "node_modules/core-js/library/modules/es6.string.iterator.js": "zQR9",
       "node_modules/babel-runtime/helpers/possibleConstructorReturn.js": "zwoO",
-      "node_modules/symbol-observable/lib/ponyfill.js": "zzRL"
+      "node_modules/symbol-observable/lib/ponyfill.js": "zzRL",
+      "node_modules/babel-loader/lib/index.js??ref--0-0!web/reducers.js": "UdY5",
+      "node_modules/babel-loader/lib/index.js??ref--0-0!web/configureStore.js": "Zo1f"
     },
     "usedIds": {
       "0": 0,
@@ -501,7 +503,9 @@
       "yyvF": "yyvF",
       "zQR9": "zQR9",
       "zwoO": "zwoO",
-      "zzRL": "zzRL"
+      "zzRL": "zzRL",
+      "UdY5": "UdY5",
+      "Zo1f": "Zo1f"
     }
   },
   "chunks": {

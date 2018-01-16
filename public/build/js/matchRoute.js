@@ -242,7 +242,7 @@ class About extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
 function selector(state) {
   return {
-    count: state
+    count: state.counter
   };
 }
 
@@ -258,6 +258,34 @@ function mapDispatch(dispatch) {
 
 /***/ }),
 
+/***/ "UdY5":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__("dJD+");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_redux__);
+
+
+// (state, action) => new state
+function counter(state = 0, action) {
+	switch (action.type) {
+		case 'INCREMENT':
+			return state + 1;
+		case 'DECREMENT':
+			return state - 1;
+		default:
+			return state;
+	}
+}
+
+const reducers = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["combineReducers"])({
+	counter
+});
+
+/* harmony default export */ __webpack_exports__["a"] = (reducers);
+
+/***/ }),
+
 /***/ "Vejm":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -270,6 +298,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router__ = __webpack_require__("rxpj");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_router__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__web_routes__ = __webpack_require__("tUxE");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_redux__ = __webpack_require__("H/qB");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_react_redux__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__web_configureStore__ = __webpack_require__("Zo1f");
+
+
 
 
 
@@ -277,6 +310,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function matchRoute(req) {
   console.log('mat!');
+  const store = Object(__WEBPACK_IMPORTED_MODULE_5__web_configureStore__["a" /* default */])();
   return new Promise((resolve, reject) => {
     Object(__WEBPACK_IMPORTED_MODULE_2_react_router__["match"])({ routes: __WEBPACK_IMPORTED_MODULE_3__web_routes__["a" /* default */], location: req.url }, (error, redirectLocation, renderProp) => {
       if (error) {
@@ -291,7 +325,11 @@ function matchRoute(req) {
         });
       } else if (renderProp) {
         console.log(renderProp);
-        const element = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router__["RouterContext"], renderProp);
+        const element = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          __WEBPACK_IMPORTED_MODULE_4_react_redux__["Provider"],
+          { store: store },
+          __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router__["RouterContext"], renderProp)
+        );
         const content = __WEBPACK_IMPORTED_MODULE_1_react_dom_server___default.a.renderToString(element);
         console.log(content);
         resolve({ content });
@@ -306,6 +344,24 @@ function matchRoute(req) {
 
 /***/ }),
 
+/***/ "Zo1f":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = configureStore;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__("dJD+");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_redux__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__reducers__ = __webpack_require__("UdY5");
+
+
+
+function configureStore() {
+    const store = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["createStore"])(__WEBPACK_IMPORTED_MODULE_1__reducers__["a" /* default */]);
+    return store;
+}
+
+/***/ }),
+
 /***/ "Zt5a":
 /***/ (function(module, exports) {
 
@@ -313,6 +369,13 @@ module.exports = {
 	"container": "_2z3W8aYa",
 	"pugHeading": "_17C1MWWK"
 };
+
+/***/ }),
+
+/***/ "dJD+":
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
 
 /***/ }),
 
@@ -335,7 +398,7 @@ class Header extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
 				{ className: __WEBPACK_IMPORTED_MODULE_1__header_module_scss___default.a.pugHeading },
-				' Pug Clug Blog '
+				' Pug Club Blog '
 			)
 		);
 	}
