@@ -15,10 +15,21 @@ function counter( state = 0, action ) {
 
 function posts( state = {}, action ) {
 	switch (action.type) {
-		case 'LOAD_POSTS':
-			return action.payload
-		case 'DECREMENT':
-			return state - 1
+		case 'LOAD_POSTS_PENDING':
+			return {
+				isRejected: false,
+				data: null,
+			}
+		case 'LOAD_POSTS_FULFILLED':
+			return {
+				isRejected: false,
+				data: action.payload,		
+			}
+		case 'LOAD_POSTS_REJECTED':
+			return {
+				isRejected: true,
+				data: 'There is error',
+			}
 		default:
 			return state
 	}

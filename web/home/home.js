@@ -16,7 +16,7 @@ class Home extends React.Component {
     return (
       <div>
         <h1>Latest Posts</h1>
-        <PostList data={posts} />
+        <PostList data={posts.data} />
       </div>
     )
   }

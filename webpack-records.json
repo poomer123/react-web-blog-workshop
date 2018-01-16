@@ -288,7 +288,9 @@
       "node_modules/babel-runtime/helpers/possibleConstructorReturn.js": "zwoO",
       "node_modules/symbol-observable/lib/ponyfill.js": "zzRL",
       "node_modules/babel-loader/lib/index.js??ref--0-0!web/reducers.js": "UdY5",
-      "node_modules/babel-loader/lib/index.js??ref--0-0!web/configureStore.js": "Zo1f"
+      "node_modules/babel-loader/lib/index.js??ref--0-0!web/configureStore.js": "Zo1f",
+      "node_modules/redux-promise-middleware/dist/index.js": "EBT9",
+      "node_modules/redux-promise-middleware/dist/isPromise.js": "t/fv"
     },
     "usedIds": {
       "0": 0,
@@ -505,7 +507,9 @@
       "zwoO": "zwoO",
       "zzRL": "zzRL",
       "UdY5": "UdY5",
-      "Zo1f": "Zo1f"
+      "Zo1f": "Zo1f",
+      "EBT9": "EBT9",
+      "t/fv": "t/fv"
     }
   },
   "chunks": {
