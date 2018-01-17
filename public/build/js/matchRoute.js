@@ -153,13 +153,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 class Home extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
-  // state = {data: null, isLoading: false}
   componentDidMount() {
     // this.setState({isLoading: true})
     // fetch('https://jsonplaceholder.typicode.com/posts?userId=1')
     //   .then( d => d.json() )
     //   .then( d => this.setState({data: d, isLoading: false}) )
-    this.props.loadPosts();
+    this.props.dispatch({
+      type: 'LOAD_POSTS',
+      payload: fetch('https://jsonplaceholder.typicode.com/posts?userId=1').then(d => d.json())
+    });
   }
   render() {
     const { posts } = this.props;
@@ -193,7 +195,7 @@ function mapDispatch(dispatch) {
   };
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect"])(selector, mapDispatch)(Home));
+/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect"])(selector)(Home));
 
 /***/ }),
 
