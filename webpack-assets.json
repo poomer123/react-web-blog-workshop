@@ -1,12 +1,12 @@
 {
   "main": {
-    "js": "/build/js/main.d8b7b914e98f05183631.js",
+    "js": "/build/js/main.85d2004d3185a67d2d4c.js",
     "css": "/build/css/main.a5f78c493460f37e028f897b633a7cb0.css"
   },
   "vendor": {
     "js": "/build/js/vendor.6b08ac14052a1419674b.js"
   },
   "manifest": {
-    "js": "/build/js/manifest.c9560f760a281b31bbc9.js"
+    "js": "/build/js/manifest.226daf6f4d083df1f05c.js"
   }
 }
