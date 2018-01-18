@@ -290,7 +290,9 @@
       "node_modules/babel-loader/lib/index.js??ref--0-0!web/reducers.js": "UdY5",
       "node_modules/babel-loader/lib/index.js??ref--0-0!web/configureStore.js": "Zo1f",
       "node_modules/redux-promise-middleware/dist/index.js": "EBT9",
-      "node_modules/redux-promise-middleware/dist/isPromise.js": "t/fv"
+      "node_modules/redux-promise-middleware/dist/isPromise.js": "t/fv",
+      "node_modules/redux-thunk/lib/index.js": "4ufr",
+      "node_modules/babel-loader/lib/index.js??ref--0-0!web/actions.js": "nSrI"
     },
     "usedIds": {
       "0": 0,
@@ -509,7 +511,9 @@
       "UdY5": "UdY5",
       "Zo1f": "Zo1f",
       "EBT9": "EBT9",
-      "t/fv": "t/fv"
+      "t/fv": "t/fv",
+      "4ufr": "4ufr",
+      "nSrI": "nSrI"
     }
   },
   "chunks": {

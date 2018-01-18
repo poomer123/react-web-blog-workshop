@@ -7,7 +7,7 @@ import routes from './routes'
 import {Provider} from 'react-redux'
 import configureStore from './configureStore'
 
-const store = configureStore()
+const store = configureStore({preloadState: window.__REDUXDATA__})
 
 match(
 	{history: browserHistory, routes},
@@ -16,7 +16,6 @@ match(
 			<Provider store={store}>
 				<Router {...renderProps} />
 			</Provider>,
-
 			document.getElementById('app')
 		)
 	}
