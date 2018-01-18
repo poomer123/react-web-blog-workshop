@@ -156,7 +156,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 class Home extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
   componentDidMount() {
-    this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions__["b" /* loadPosts */])());
+    this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions__["a" /* loadPosts */])());
   }
   render() {
     const { posts } = this.props;
@@ -179,7 +179,13 @@ function selector(state) {
   };
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect"])(selector)(Home));
+const Connected = Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect"])(selector)(Home);
+
+Connected.fetchData = store => {
+  return store.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions__["a" /* loadPosts */])());
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Connected);
 
 /***/ }),
 
@@ -339,15 +345,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_redux__ = __webpack_require__("H/qB");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_redux__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__web_configureStore__ = __webpack_require__("Zo1f");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__web_actions__ = __webpack_require__("nSrI");
 
 
-let matchRoute = (() => {
-  var _ref = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_asyncToGenerator___default()(function* (req) {
-    const store = Object(__WEBPACK_IMPORTED_MODULE_6__web_configureStore__["a" /* default */])();
-    yield store.dispatch(Object(__WEBPACK_IMPORTED_MODULE_7__web_actions__["a" /* fetchPosts */])());
-    return new Promise(function (resolve, reject) {
-      Object(__WEBPACK_IMPORTED_MODULE_3_react_router__["match"])({ routes: __WEBPACK_IMPORTED_MODULE_4__web_routes__["a" /* default */], location: req.url }, function (error, redirectLocation, renderProp) {
+
+
+
+
+
+
+function matchRoute(req) {
+  const store = Object(__WEBPACK_IMPORTED_MODULE_6__web_configureStore__["a" /* default */])();
+  return new Promise((resolve, reject) => {
+    Object(__WEBPACK_IMPORTED_MODULE_3_react_router__["match"])({ routes: __WEBPACK_IMPORTED_MODULE_4__web_routes__["a" /* default */], location: req.url }, (() => {
+      var _ref = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_asyncToGenerator___default()(function* (error, redirectLocation, renderProp) {
         if (error) {
           console.log('1!');
           resolve({ error });
@@ -359,7 +369,13 @@ let matchRoute = (() => {
             }
           });
         } else if (renderProp) {
-          console.log(renderProp);
+          console.log(renderProp.components);
+          const prefetches = renderProp.components.filter(function (c) {
+            return c.fetchData;
+          }).map(function (c) {
+            return c.fetchData(store);
+          });
+          yield Promise.all(prefetches);
           const element = __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
             __WEBPACK_IMPORTED_MODULE_5_react_redux__["Provider"],
             { store: store },
@@ -375,21 +391,13 @@ let matchRoute = (() => {
           console.log('error');
         }
       });
-    });
+
+      return function (_x, _x2, _x3) {
+        return _ref.apply(this, arguments);
+      };
+    })());
   });
-
-  return function matchRoute(_x) {
-    return _ref.apply(this, arguments);
-  };
-})();
-
-
-
-
-
-
-
-
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (matchRoute);
 
@@ -485,8 +493,8 @@ module.exports = require("react-dom/server");
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["b"] = loadPosts;
-/* harmony export (immutable) */ __webpack_exports__["a"] = fetchPosts;
+/* harmony export (immutable) */ __webpack_exports__["a"] = loadPosts;
+/* unused harmony export fetchPosts */
 function loadPosts() {
     return (dispatch, getState) => {
         const { posts } = getState();
