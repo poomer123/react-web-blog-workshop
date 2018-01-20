@@ -2,13 +2,15 @@ import React from 'react'
 import ReactDOMServer from 'react-dom/server'
 import {match, RouterContext} from 'react-router'
 import routes from '../web/routes'
+import {Provider} from 'react-redux'
+import configureStore from '../web/configureStore'
 
 function matchRoute(req) {
-  console.log('mat!')
+  const store = configureStore()
   return new Promise((resolve, reject) => {
     match(
       {routes, location: req.url},
-      (error, redirectLocation, renderProp) => {
+      async (error, redirectLocation, renderProp) => {
         if(error){
           console.log('1!')
           resolve({error})
@@ -20,11 +22,21 @@ function matchRoute(req) {
             }
           })
         } else if (renderProp) {
-          console.log(renderProp)
-          const element = <RouterContext {...renderProp} />
+          const prefetches = renderProp.components
+            .filter(c => c.fetchData)
+            .map(c => c.fetchData(store))
+          await Promise.all(prefetches)
+          const element = (
+            <Provider store={store}>
+              <RouterContext {...renderProp} />
+            </Provider>
+          )
           const content = ReactDOMServer.renderToString(element)
           console.log(content)
-          resolve({content})
+          resolve({
+            content,
+            data: store.getState(),
+          })
         } else {
           console.log('error')
         }

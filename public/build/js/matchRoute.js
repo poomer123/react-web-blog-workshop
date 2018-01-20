@@ -82,6 +82,13 @@ module.exports = __webpack_require__("Vejm");
 
 /***/ }),
 
+/***/ "28Ef":
+/***/ (function(module, exports) {
+
+module.exports = require("redux-promise-middleware");
+
+/***/ }),
+
 /***/ "5Eq3":
 /***/ (function(module, exports) {
 
@@ -99,6 +106,38 @@ module.exports = {
 
 /***/ }),
 
+/***/ "BUo6":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("Jmof");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+
+
+class Post extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+  render() {
+    const { data } = this.props;
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      null,
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'h3',
+        null,
+        data.title
+      ),
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+        'div',
+        null,
+        data.body
+      )
+    );
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (Post);
+
+/***/ }),
+
 /***/ "DFp7":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -106,10 +145,21 @@ module.exports = {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("Jmof");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__("H/qB");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_redux__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__posts_postlist__ = __webpack_require__("w/LM");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__actions__ = __webpack_require__("nSrI");
+
+
+
 
 
 class Home extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+  componentDidMount() {
+    this.props.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions__["a" /* loadPosts */])());
+  }
   render() {
+    const { posts } = this.props;
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
       null,
@@ -118,21 +168,31 @@ class Home extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
         null,
         'Latest Posts'
       ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        null,
-        'Post 1'
-      ),
-      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-        'div',
-        null,
-        'Post 2'
-      )
+      __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__posts_postlist__["a" /* default */], { data: posts.data })
     );
   }
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Home);
+function selector(state) {
+  return {
+    posts: state.posts
+  };
+}
+
+const Connected = Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect"])(selector)(Home);
+
+Connected.fetchData = store => {
+  return store.dispatch(Object(__WEBPACK_IMPORTED_MODULE_3__actions__["a" /* loadPosts */])());
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Connected);
+
+/***/ }),
+
+/***/ "H/qB":
+/***/ (function(module, exports) {
+
+module.exports = require("react-redux");
 
 /***/ }),
 
@@ -150,9 +210,20 @@ module.exports = require("react");
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("Jmof");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux__ = __webpack_require__("H/qB");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_redux__);
+
 
 
 class About extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+  constructor(...args) {
+    var _temp;
+
+    return _temp = super(...args), this._handleClick = () => {
+      this.props.handleClick();
+    }, _temp;
+  }
+
   render() {
     return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
       'div',
@@ -169,13 +240,91 @@ class About extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
           'div',
           null,
           'We are pug lover community. All things pugs.'
+        ),
+        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+          'button',
+          { onClick: this._handleClick },
+          'Click ',
+          this.props.count
         )
       )
     );
   }
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (About);
+function selector(state) {
+  return {
+    count: state.counter
+  };
+}
+
+function mapDispatch(dispatch) {
+  return {
+    handleClick: () => {
+      dispatch({ type: 'INCREMENT' });
+    }
+  };
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(__WEBPACK_IMPORTED_MODULE_1_react_redux__["connect"])(selector, mapDispatch)(About));
+
+/***/ }),
+
+/***/ "SHgP":
+/***/ (function(module, exports) {
+
+module.exports = require("redux-thunk");
+
+/***/ }),
+
+/***/ "UdY5":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__("dJD+");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_redux__);
+
+
+// (state, action) => new state
+function counter(state = 0, action) {
+	switch (action.type) {
+		case 'INCREMENT':
+			return state + 1;
+		case 'DECREMENT':
+			return state - 1;
+		default:
+			return state;
+	}
+}
+
+function posts(state = {}, action) {
+	switch (action.type) {
+		case 'LOAD_POSTS_PENDING':
+			return {
+				isRejected: false,
+				data: null
+			};
+		case 'LOAD_POSTS_FULFILLED':
+			return {
+				isRejected: false,
+				data: action.payload
+			};
+		case 'LOAD_POSTS_REJECTED':
+			return {
+				isRejected: true,
+				data: 'There is error'
+			};
+		default:
+			return state;
+	}
+}
+
+const reducers = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["combineReducers"])({
+	counter,
+	posts
+});
+
+/* harmony default export */ __webpack_exports__["a"] = (reducers);
 
 /***/ }),
 
@@ -184,46 +333,106 @@ class About extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("Jmof");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom_server__ = __webpack_require__("jAJp");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom_server___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom_server__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router__ = __webpack_require__("rxpj");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_router__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__web_routes__ = __webpack_require__("tUxE");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_asyncToGenerator__ = __webpack_require__("ZrOi");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_asyncToGenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_asyncToGenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__("Jmof");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom_server__ = __webpack_require__("jAJp");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_react_dom_server___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_react_dom_server__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router__ = __webpack_require__("rxpj");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_react_router___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_react_router__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__web_routes__ = __webpack_require__("tUxE");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_redux__ = __webpack_require__("H/qB");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_react_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_react_redux__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__web_configureStore__ = __webpack_require__("Zo1f");
+
+
+
 
 
 
 
 
 function matchRoute(req) {
-  console.log('mat!');
+  const store = Object(__WEBPACK_IMPORTED_MODULE_6__web_configureStore__["a" /* default */])();
   return new Promise((resolve, reject) => {
-    Object(__WEBPACK_IMPORTED_MODULE_2_react_router__["match"])({ routes: __WEBPACK_IMPORTED_MODULE_3__web_routes__["a" /* default */], location: req.url }, (error, redirectLocation, renderProp) => {
-      if (error) {
-        console.log('1!');
-        resolve({ error });
-      } else if (redirectLocation) {
-        console.log('2!');
-        resolve({
-          redirect: {
-            url: redirectLocation.pathname + redirectLocation.search
-          }
-        });
-      } else if (renderProp) {
-        console.log(renderProp);
-        const element = __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2_react_router__["RouterContext"], renderProp);
-        const content = __WEBPACK_IMPORTED_MODULE_1_react_dom_server___default.a.renderToString(element);
-        console.log(content);
-        resolve({ content });
-      } else {
-        console.log('error');
-      }
-    });
+    Object(__WEBPACK_IMPORTED_MODULE_3_react_router__["match"])({ routes: __WEBPACK_IMPORTED_MODULE_4__web_routes__["a" /* default */], location: req.url }, (() => {
+      var _ref = __WEBPACK_IMPORTED_MODULE_0_babel_runtime_helpers_asyncToGenerator___default()(function* (error, redirectLocation, renderProp) {
+        if (error) {
+          console.log('1!');
+          resolve({ error });
+        } else if (redirectLocation) {
+          console.log('2!');
+          resolve({
+            redirect: {
+              url: redirectLocation.pathname + redirectLocation.search
+            }
+          });
+        } else if (renderProp) {
+          console.log(renderProp.components);
+          const prefetches = renderProp.components.filter(function (c) {
+            return c.fetchData;
+          }).map(function (c) {
+            return c.fetchData(store);
+          });
+          yield Promise.all(prefetches);
+          const element = __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(
+            __WEBPACK_IMPORTED_MODULE_5_react_redux__["Provider"],
+            { store: store },
+            __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3_react_router__["RouterContext"], renderProp)
+          );
+          const content = __WEBPACK_IMPORTED_MODULE_2_react_dom_server___default.a.renderToString(element);
+          console.log(content);
+          resolve({
+            content,
+            data: store.getState()
+          });
+        } else {
+          console.log('error');
+        }
+      });
+
+      return function (_x, _x2, _x3) {
+        return _ref.apply(this, arguments);
+      };
+    })());
   });
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (matchRoute);
+
+/***/ }),
+
+/***/ "Zo1f":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = configureStore;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux__ = __webpack_require__("dJD+");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_redux___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_redux__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_promise_middleware__ = __webpack_require__("28Ef");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_redux_promise_middleware___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_redux_promise_middleware__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__reducers__ = __webpack_require__("UdY5");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_redux_thunk__ = __webpack_require__("SHgP");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_redux_thunk___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_redux_thunk__);
+
+
+
+
+
+const composeEnhancers = typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || __WEBPACK_IMPORTED_MODULE_0_redux__["compose"];
+
+function configureStore({ preloadState } = {}) {
+    const store = Object(__WEBPACK_IMPORTED_MODULE_0_redux__["createStore"])(__WEBPACK_IMPORTED_MODULE_2__reducers__["a" /* default */], preloadState, composeEnhancers(Object(__WEBPACK_IMPORTED_MODULE_0_redux__["applyMiddleware"])(__WEBPACK_IMPORTED_MODULE_3_redux_thunk___default.a, __WEBPACK_IMPORTED_MODULE_1_redux_promise_middleware___default()())));
+    return store;
+}
+
+/***/ }),
+
+/***/ "ZrOi":
+/***/ (function(module, exports) {
+
+module.exports = require("babel-runtime/helpers/asyncToGenerator");
 
 /***/ }),
 
@@ -234,6 +443,13 @@ module.exports = {
 	"container": "_2z3W8aYa",
 	"pugHeading": "_17C1MWWK"
 };
+
+/***/ }),
+
+/***/ "dJD+":
+/***/ (function(module, exports) {
+
+module.exports = require("redux");
 
 /***/ }),
 
@@ -256,7 +472,7 @@ class Header extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 			__WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
 				'div',
 				{ className: __WEBPACK_IMPORTED_MODULE_1__header_module_scss___default.a.pugHeading },
-				' Pug Clug Blog '
+				' Pug Club Blog '
 			)
 		);
 	}
@@ -270,6 +486,31 @@ class Header extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
 /***/ (function(module, exports) {
 
 module.exports = require("react-dom/server");
+
+/***/ }),
+
+/***/ "nSrI":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = loadPosts;
+/* unused harmony export fetchPosts */
+function loadPosts() {
+    return (dispatch, getState) => {
+        const { posts } = getState();
+        if (posts.data != null) {
+            return;
+        }
+        return dispatch(fetchPosts());
+    };
+}
+
+function fetchPosts() {
+    return {
+        type: 'LOAD_POSTS',
+        payload: fetch('https://jsonplaceholder.typicode.com/posts?userId=1').then(d => d.json())
+    };
+}
 
 /***/ }),
 
@@ -371,6 +612,33 @@ const routes = {
 };
 
 /* harmony default export */ __webpack_exports__["a"] = (routes);
+
+/***/ }),
+
+/***/ "w/LM":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("Jmof");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Post__ = __webpack_require__("BUo6");
+
+
+
+class PostList extends __WEBPACK_IMPORTED_MODULE_0_react___default.a.Component {
+  render() {
+    const { data } = this.props;
+    return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+      'div',
+      null,
+      data && data.map(e => {
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__Post__["a" /* default */], { data: e, key: `post_${e.id}` });
+      })
+    );
+  }
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (PostList);
 
 /***/ })
 

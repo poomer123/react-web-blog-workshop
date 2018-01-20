@@ -1,2 +1,0 @@
-webpackJsonp([4],{"O+B3":function(e,i,o){"use strict";function d(e){return t()("div",{},void 0,t()("h1",{},void 0,"About"),t()("div",{},void 0,t()("div",{},void 0,"We are pug lover community. All things pugs.")))}Object.defineProperty(i,"__esModule",{value:!0});var n=o("dcb+"),t=o.n(n),u=o("GiK3");o.n(u);i.default=d}});
-//# sourceMappingURL=4.a089343f8bc28cfa9a48.chunk.js.map
